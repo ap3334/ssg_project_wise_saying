@@ -52,13 +52,15 @@ public class App {
         PrintWriter pw = new PrintWriter("./wise_saying/" + cnt + ".json");
 
         System.out.printf("명언 :  ");
-        String wiseSaying = sc.nextLine();
+        String content = sc.nextLine();
 
         System.out.printf("작가 : ");
         String writer = sc.nextLine();
 
+        WiseSaying wiseSaying = new WiseSaying(cnt, content, writer);
+
         pw.println("{");
-        pw.println("\"wiseSaying\": \"" + wiseSaying + "\",");
+        pw.println("\"wiseSaying\": \"" + content + "\",");
         pw.println("\"writer\": \"" + writer + "\"");
         pw.println("}");
 
