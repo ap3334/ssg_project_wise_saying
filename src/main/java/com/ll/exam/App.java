@@ -60,7 +60,7 @@ public class App {
         WiseSaying wiseSaying = new WiseSaying(cnt, content, writer);
 
         pw.println("{");
-        pw.println("\"wiseSaying\": \"" + content + "\",");
+        pw.println("\"content\": \"" + content + "\",");
         pw.println("\"writer\": \"" + writer + "\"");
         pw.println("}");
 
