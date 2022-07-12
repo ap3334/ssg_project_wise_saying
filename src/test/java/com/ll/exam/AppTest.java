@@ -37,7 +37,7 @@ public class AppTest {
     }
 
     @Test
-    public void 표준풀력을_리다이렉션하여_결과를_문자열로_받기() throws IOException {
+    public void 표준출력을_리다이렉션하여_결과를_문자열로_받기() throws IOException {
 
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));

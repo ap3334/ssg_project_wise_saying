@@ -1,6 +1,8 @@
 package com.ll.exam;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -11,16 +13,8 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
 
-        int cnt = 0;
-
-        while (true) {
-            cnt++;
-            try {
-                FileInputStream input = new FileInputStream("./wise_saying/" + cnt + ".json");
-            } catch (Exception e) {
-                break;
-            }
-        }
+        List<WiseSaying> wiseSayings = new ArrayList<>();
+        int wiseSayingLastId = 0;
 
         outer:
         while (true) {
@@ -30,14 +24,35 @@ public class App {
 
             switch (cmd) {
 
-                case("등록"):
-                    cnt = register(sc, cnt);
+                case ("등록"):
+
+                    System.out.printf("명언 :  ");
+                    String content = sc.nextLine();
+
+                    System.out.printf("작가 : ");
+                    String writer = sc.nextLine();
+
+                    int id = ++wiseSayingLastId;
+
+                    WiseSaying wiseSaying = new WiseSaying(id, content, writer);
+                    wiseSayings.add(wiseSaying);
+
+                    System.out.println(id + "번 명언이 등록되었습니다.");
+
                     break;
 
-                case("목록"):
+                case ("목록"):
+                    System.out.println("번호 / 작가 / 명언");
+                    System.out.println("-----------------------");
 
+                    for (int i = wiseSayings.size() - 1; i >= 0; i--) {
+                        WiseSaying wiseSaying_ = wiseSayings.get(i);
+                        System.out.printf("%d / %s / %d\n", wiseSaying_.id, wiseSaying_.content, wiseSaying_.writer);
+                    }
 
-                case("종료"):
+                    break;
+
+                case ("종료"):
                     break outer;
 
             }
@@ -46,28 +61,5 @@ public class App {
 
         sc.close();
 
-    }
-
-    private int register(Scanner sc, int cnt) throws IOException {
-        PrintWriter pw = new PrintWriter("./wise_saying/" + cnt + ".json");
-
-        System.out.printf("명언 :  ");
-        String content = sc.nextLine();
-
-        System.out.printf("작가 : ");
-        String writer = sc.nextLine();
-
-        WiseSaying wiseSaying = new WiseSaying(cnt, content, writer);
-
-        pw.println("{");
-        pw.println("\"content\": \"" + content + "\",");
-        pw.println("\"writer\": \"" + writer + "\"");
-        pw.println("}");
-
-        pw.close();
-
-        System.out.println(cnt + "번 명언이 등록되었습니다.");
-        cnt++;
-        return cnt;
     }
 }

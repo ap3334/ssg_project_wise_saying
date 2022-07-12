@@ -2,11 +2,11 @@ package com.ll.exam;
 
 public class WiseSaying {
 
-    private int id;
+    int id;
 
-    private String content;
+    String content;
 
-    private String writer;
+    String writer;
 
     public WiseSaying(int id, String content, String writer) {
         this.id = id;
