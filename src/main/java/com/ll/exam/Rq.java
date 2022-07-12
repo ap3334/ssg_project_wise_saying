@@ -23,6 +23,10 @@ public class Rq {
             }
         }
 
+        if ( urlBits.length == 1 ) {
+            return defaultValue;
+        }
+
         return 0;
     }
 
