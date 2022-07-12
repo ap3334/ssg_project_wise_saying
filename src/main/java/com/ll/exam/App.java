@@ -77,14 +77,13 @@ public class App {
                     break;
 
                 case ("목록"):
-                    System.out.println("번호 / 작가 / 명언");
-                    System.out.println("-----------------------");
 
+                    System.out.println("번호 / 작가 / 명언");
+                    System.out.println("-------------------");
                     for (int i = wiseSayings.size() - 1; i >= 0; i--) {
                         WiseSaying wiseSaying_ = wiseSayings.get(i);
-                        System.out.printf("%d / %s / %d\n", wiseSaying_.id, wiseSaying_.content, wiseSaying_.writer);
+                        System.out.printf("%d / %s / %s\n", wiseSaying_.id, wiseSaying_.content, wiseSaying_.author);
                     }
-
                     break;
 
                 case ("종료"):
