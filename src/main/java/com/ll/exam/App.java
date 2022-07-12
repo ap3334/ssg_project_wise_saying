@@ -82,7 +82,7 @@ public class App {
                     System.out.println("-------------------");
                     for (int i = wiseSayings.size() - 1; i >= 0; i--) {
                         WiseSaying wiseSaying_ = wiseSayings.get(i);
-                        System.out.printf("%d / %s / %s\n", wiseSaying_.id, wiseSaying_.content, wiseSaying_.author);
+                        System.out.printf("%d / %s / %s\n", wiseSaying_.id, wiseSaying_.content, wiseSaying_.writer);
                     }
                     break;
 
