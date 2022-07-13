@@ -1,5 +1,8 @@
 package com.ll.exam;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Rq {
 
     String url;
@@ -8,38 +11,50 @@ public class Rq {
 
     String queryStr;
 
+    Map<String, String> queryParams;
+
     public Rq(String url) {
         this.url = url;
         String[] urlBits = url.split("\\?", 2);
         this.path = urlBits[0];
 
+        this.queryParams = new HashMap<>();
+
         if (urlBits.length == 2) {
-            this.queryStr = urlBits[1];
-        }
-    }
+            String queryStr = urlBits[1];
 
-    public int getIntParam(String paramName, int defaultValue) {
+            String[] paramBits = queryStr.split("&");
 
-        if (queryStr == null) {
-            return defaultValue;
-        }
+            for (String paramBit : paramBits) {
+                String[] paramNameAndValue = paramBit.split("=", 2);
 
-        String[] bits = queryStr.split("&");
+                if (paramNameAndValue.length == 1) {
+                    continue;
+                }
 
-        for (String urlBit : bits) {
+                String paramName = paramNameAndValue[0].trim();
+                String paramValue = paramNameAndValue[1].trim();
 
-            String[] paramNameAndValue = urlBit.split("=", 2);
-            String paramName_ = paramNameAndValue[0];
-            String paramValue = paramNameAndValue[1];
-
-            if (paramName.equals(paramName_)) {
-                return Integer.parseInt(paramValue);
+                queryParams.put(paramName, paramValue);
             }
         }
 
 
+    }
 
-        return 0;
+    public int getIntParam(String paramName, int defaultValue) {
+
+        if (queryParams.containsKey(paramName) == false) {
+            return defaultValue;
+        }
+
+        String paramValue = queryParams.get(paramName);
+
+        if (paramValue.length() == 0) {
+            return defaultValue;
+        }
+
+        return Integer.parseInt(paramValue);
     }
 
     public String getPath() {
